@@ -15,3 +15,7 @@ int SWL_Pushed (SWL_SwitchPos pos)
 {
     return PT1AD1 & pos;
 }
+void SWL_TOG(SWL_LEDColour led)
+{
+    PT1AD1 ^= (unsigned char)led;
+}

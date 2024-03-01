@@ -23,16 +23,16 @@
 #include <hidef.h>      /* common defines and macros */
 #include "derivative.h" /* derivative-specific definitions */
 #include "clock.h"
-#include "clock.c"
+#include "SW_LED.h"
+
+
 //Other system includes or your includes go here
 
 
 /********************************************************************/
 //Defines
 /********************************************************************/
-PLLCTL = PLLCTL_PLLON_MASK | PLLCTL_AUTO_MASK;
-ECLKCTL &= ~ECLKCTL_NECLK_MASK;
-CLKSEL |= CLKSEL_PLLSEL_MASK;
+
 /********************************************************************/
 // Local Prototypes
 /********************************************************************/
@@ -40,13 +40,11 @@ CLKSEL |= CLKSEL_PLLSEL_MASK;
 /********************************************************************/
 // Global Variables
 /********************************************************************/
-
+unsigned long i = 0;
 /********************************************************************/
 // Constants
 /********************************************************************/
-PLLCTL = 0b01100000;
-SYNR = 6; 
-REFDV = 5;
+
 /********************************************************************/
 // Main Entry
 /********************************************************************/
@@ -61,7 +59,9 @@ void main(void)
 /********************************************************************/
   // one-time initializations
 /********************************************************************/
-
+  PT1AD1 &= 0x1F;
+  DDR1AD1 = 0xE0;
+  ATD1DIEN1 |= 0b00011111;
 
 /********************************************************************/
   // main program loop
@@ -69,9 +69,19 @@ void main(void)
 
   for (;;)
   {
-while(!(CRGFLG & CRGFLG_LOCK_MASK));
-CLKSEL |= 0b10000000;
-ECLKCTL &= ~ECLKCTL_NECLK_MASK;
+   
+    i=0;
+  SWL_TOG(SWL_RED);
+     for( i=0; i < 21000;i++)     
+    {}
+
+if(SWL_Pushed(SWL_CTR))
+{
+Clock_Set20MHZ();
+}
+     
+ 
+
   }                   
 }
 
