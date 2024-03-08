@@ -7,13 +7,13 @@
 unsigned long speed = DEF_BUS_CLOCK;
 
 
-void Clock_EnableOutput(ClockOutDiv);
+/*void Clock_EnableOutput(ClockOutDiv);
 {
 if(speed == ClockOutDiv1) Clock_Set8MHZ();
 else if( speed == ClockOutDiv2) Clock_Set20MHZ();
 else if(speed == ClockOutDiv3) Clock-Clock_Set24MHZ();
 else if(speed == ClockOutDiv4) Clock_Set40MHZ();
-}
+}*/
 void Clock_Set8MHZ(void)
 {
 PLLCTL = 0;
