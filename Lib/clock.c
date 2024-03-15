@@ -50,7 +50,7 @@ while(!(CRGFLG & CRGFLG_LOCK_MASK));
  CLKSEL |= CLKSEL_PLLSEL_MASK;
  speed = 40000000;
 }
-unsigned long Clock_GetBusSpeed(void);
+unsigned long Clock_GetBusSpeed(void)
 {
   return speed;
 }
