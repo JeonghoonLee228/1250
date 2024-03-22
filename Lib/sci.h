@@ -1,5 +1,5 @@
 // SCI library
-// Last Modified : February 13 2023
+// Last Modified : February 16 2023
 // Revision History:
 // May 13th 2014 - Initial Port to C - Simon Walker
 // June 8th 2015 - Genric BAUD init added, others removed except for IRDA
@@ -64,7 +64,7 @@ unsigned char sci0_bread(void);
 unsigned char sci0_rxByte(unsigned char * pData);
 
 // send a byte over SCI
-void sci0_txByte (unsigned char data);
+void sci0_txByte (unsigned char *data);
 
 // send a null-terminated string over SCI
 void sci0_txStr (char const * straddr);
