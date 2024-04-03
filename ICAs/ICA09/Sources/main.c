@@ -4,7 +4,7 @@
 // Bus Speed:      20 MHz
 // Author:        Jeonghoon Lee
 // Details:       A more detailed explanation of the program is entered here               
-// Date:          March 22nd, 2024
+// Date:         april 02nd, 2024
 // Revision History :
 //  each revision will have a date + desc. of changes
 
@@ -58,7 +58,7 @@ void main(void)
 SWL_Init();
   RTI_Init();
   sci0_Init2();
-SCI0BD = 65;
+//SCI0BD = 65;
 /********************************************************************/
   // main program loop
 /********************************************************************/
