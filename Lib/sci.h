@@ -37,6 +37,15 @@ typedef struct SCI_Typedef__
     //SCIDRL OFFSET: 0x7    
     unsigned char DRL;
 }SCI_Typedef;
+typedef enum eBaudRate
+{
+BAUD_9600_BUS20MHZ = 130,
+BAUD_300_BUS20MHZ = 4163,
+BAUD_1200_BUS20MHZ = 1042,
+BAUD_19200_BUS20MHZ = 65,
+BAUD_38400_BUS20MHZ = 33,
+BAUD_57600_BUS20MHZ =22 ,
+} BaudRate;
 
 typedef SCI_Typedef* SCI_Base;
 
