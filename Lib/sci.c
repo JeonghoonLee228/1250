@@ -28,6 +28,13 @@ while (!SCI0SR1_TDRE); //Blocking
 //if(SCI0SR1_TDRE) // non blocking
 SCI0DRL = data;
 }
+void sci0_txByte2 (unsigned char data)
+{
+    if(SCI0SR1_TDRE)
+    {
+        SCI0DRL = data;
+    }
+}
 
 unsigned char sci0_rxByte(unsigned char *pData)
 {
