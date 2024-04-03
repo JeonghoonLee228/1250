@@ -22,13 +22,13 @@ unsigned char sci0_bread(unsigned char pData)
     }
 }
 
-void sci0_txByte(unsigned char *data)//send data
+void sci0_txByte (unsigned char data)
 {
-    if (SCI0SR1 & SCI0SR1_TDRE_MASK)
-    {
-        SCI0DRL = *data;
-    }
+while (!SCI0SR1_TDRE); //Blocking
+//if(SCI0SR1_TDRE) // non blocking
+SCI0DRL = data;
 }
+
 unsigned char sci0_rxByte(unsigned char *pData)
 {
     if (SCI0DRL & SCI0SR1_RDRF_MASK)
@@ -43,13 +43,15 @@ unsigned char sci0_rxByte(unsigned char *pData)
 }
 void sci0_txStr(char const *straddr)
 { 
-    for(iz == 0; iz <= 6; ++iz)
-    {
-        sci0_txByte(&straddr[iz]);
-        if(iz == 6)
-        {
-            iz = 0;
-        }
-   
-    }
+    for (; *straddr; ++straddr)
+sci0_txByte (*straddr);
+}
+void sci0_InitEnum (BaudRate br)
+{
+SCI0BD = br;
+// other initialization elements here...
+}
+unsigned long sci0_InitMath (unsigned long ulBusClock, unsigned long ulBaudRate)
+{
+    
 }
