@@ -28,13 +28,6 @@ while (!SCI0SR1_TDRE); //Blocking
 //if(SCI0SR1_TDRE) // non blocking
 SCI0DRL = data;
 }
-void sci0_txByte2 (unsigned char data)
-{
-    if(SCI0SR1_TDRE)
-    {
-        SCI0DRL = data;
-    }
-}
 
 unsigned char sci0_rxByte(unsigned char *pData)
 {
@@ -49,13 +42,20 @@ unsigned char sci0_rxByte(unsigned char *pData)
     }
 }
 void sci0_txStr(char const *straddr)
-{ 
+{ /*while(*straddr)
+{sci0_txByte (*straddr);
+    ++straddr;
+};
+*/
+    
     for (; *straddr; ++straddr)
 sci0_txByte (*straddr);
+
 }
 void sci0_InitEnum (BaudRate br)
 {
 SCI0BD = br;
+SCI0CR2 = 0b00001100;
 // other initialization elements here...
 }
 unsigned long sci0_InitMath (unsigned long ulBusClock, unsigned long ulBaudRate)
