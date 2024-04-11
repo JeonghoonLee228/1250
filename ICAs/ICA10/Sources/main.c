@@ -47,7 +47,7 @@ Segs_Init();
   // main entry point
   _DISABLE_COP();
   //EnableInterrupts;
-  
+
 /********************************************************************/
   // one-time initializations
 /********************************************************************/
@@ -59,13 +59,16 @@ Segs_Init();
 
   for (;;)
   {
-    /*
+   /* 
 Segs_Normal(1,'3',Segs_DP_OFF);
-Segs_Normal(3,12,Segs_DP_ON);
+Segs_Normal(3,13,Segs_DP_ON);
 Segs_Normal(6,0x0f,Segs_DP_OFF);
 */
-Segs_Custom(4,0b10100101); 
-  }                   
+
+
+Segs_8H(4, 0b10101010);
+
+}
 }
 
 /********************************************************************/
