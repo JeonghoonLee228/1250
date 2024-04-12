@@ -79,15 +79,13 @@ void Segs_16H (unsigned int value, Segs_LineOption row)
     Segs_Normal(addr+1, (value >> 8), Segs_DP_OFF);
     Segs_Normal(addr+2, (value >> 4), Segs_DP_OFF);
     Segs_Normal(addr+3, value, Segs_DP_OFF);
+}
 
-/*
-    for(counter = 0; counter <4; counter++)
-    {
-        
-    Segs_Normal(addr + counter, (value & numbers[counter]) % (16 * (4 - counter)), Segs_DP_OFF);
-//Segs_Normal(addr + counter, (value >> (4 * (3 - counter))) % (16 * (4 - counter)), Segs_DP_OFF);
-
-    }
-    */
-
+void Segs_16D (unsigned int value, Segs_LineOption row)
+{
+int addr = 4*row;
+Segs_Normal(addr+3,(value/1)%10,Segs_DP_OFF);
+Segs_Normal(addr+2,(value/10)%10,Segs_DP_OFF);
+Segs_Normal(addr+1,(value/100)%10,Segs_DP_OFF);
+Segs_Normal(addr,(value/1000)%10,Segs_DP_OFF);
 }
