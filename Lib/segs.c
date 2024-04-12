@@ -1,8 +1,8 @@
 #include <hidef.h>
 #include "derivative.h"
 #include "segs.h"
-#define Segs_WLATCH   \
-    PORTA &= (~0x01); \
+#define Segs_WLATCH   
+    PORTA &= (~0x01); 
     PORTA |= 0x01;
 #define Segs_ML PORTA &= (~0x02);
 #define Segs_MH PORTA |= 0x02;
@@ -60,7 +60,25 @@ void Segs_Clear(void)
 void Segs_8H(unsigned char addr, unsigned char value)
 {
     addr %=8;
-    Segs_Normal(addr, value >> 4, Segs_DP_OFF);
-    // Send second digit with sanitized address
+    if(value > 0b1111)
+    {
+Segs_Normal(addr, value >> 4, Segs_DP_OFF);  
     Segs_Normal((addr + 1) % 8, value & 0b00001111, Segs_DP_OFF);
+    }
+    else{
+        Segs_Normal((addr) % 8, value & 0b00001111, Segs_DP_OFF);
+    }
+    
+}
+void Segs_16H (unsigned int value, Segs_LineOption row)
+{
+    int addr = 4*row;
+    int counter =0;
+    for(counter = 0; counter <4; counter++)
+    {
+    Segs_Normal(addr + counter, (value >> (4 * (3 - counter))) % (16 * (4 - counter)), Segs_DP_OFF);
+
+    }
+    
+
 }
