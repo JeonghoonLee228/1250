@@ -34,7 +34,13 @@
 /********************************************************************/
 // Global Variables
 /********************************************************************/
- unsigned counter =  0;
+ unsigned counter =0;
+ unsigned hugecounter = 0;
+ unsigned shifter =0;
+ unsigned placement = 0;
+ unsigned righter =0;
+ unsigned lefter =0;
+ int caret [] = {0b11000000,0b10100000,0b10010000,0b10000001,0b10001000,0b10000010};
 /********************************************************************/
 // Constants
 /********************************************************************/
@@ -46,6 +52,8 @@ void main(void)
 {
   //Any main local variables must be declared here
 Segs_Init();
+SWL_Init();
+RTI_Init();
   // main entry point
   _DISABLE_COP();
   //EnableInterrupts;
@@ -53,15 +61,7 @@ Segs_Init();
 /********************************************************************/
   // one-time initializations
 /********************************************************************/
-
-
-/********************************************************************/
-  // main program loop
-/********************************************************************/
-
-  for (;;)
-  {
-    
+/*
 Segs_8H(0,0b0100);
 Segs_Normal(4,'3',Segs_DP_OFF);
 Segs_Custom(1,0b01001010);
@@ -69,25 +69,137 @@ Segs_Custom(2,0b11110000);
 Segs_8H(7,0b1110);
 Segs_Custom(5,0b10001011);
 Segs_Custom(6,0b10110001);
-if(SWL_Pushed(SWL_CTR))
-{
-  for(;;)
-  {
-    RTI_Delay_ms(100);
-Segs_16H(counter,0);
-counter++;
-  }
-}
-   /* 
+*/
+/********************************************************************/
+  // main program loop
+/********************************************************************/
+/* tier 1
+  for (;;)
+  {   
 
-Segs_Normal(3,13,Segs_DP_ON);
-Segs_Normal(6,0x0f,Segs_DP_OFF);
+if(SWL_Pushed(SWL_CTR))
+{   
+RTI_Delay_ms(100);
+Segs_16H(counter,0);
+Segs_16H(0xFFFF-counter,1);
+counter++;  
+}
+}
 */
 
-//Segs_16H(9999,0);
+
+
+//tier 2
+/*
+for(;;)
+{
+  if(counter >= 6)
+  {
+    counter = -1;
+ 
+  }
+  else
+  {
+    RTI_Delay_ms(100);
+Segs_Custom(placement,caret[counter]);
+Segs_Custom(placement-1,0b10000000);
+Segs_Custom(placement+1,0b10000000);
+Segs_Custom(placement-2,0b10000000);
+Segs_Custom(placement+2,0b10000000);
+
+Segs_Normal(7,shifter,Segs_DP_OFF);
+if(placement !=3)
+{
+  Segs_Custom(3,0b10000000);
+}
+
+  }
+
+counter++;
+hugecounter++;
+if(hugecounter = 10)
+{
+  if(SWL_Pushed(SWL_RIGHT))
+  {
+    hugecounter =0;
+    if(placement !=3)   
+    {
+ placement+=1;
+    shifter++;
+    } 
+                 
+  }
+  if(SWL_Pushed(SWL_LEFT))
+  {
+    hugecounter =0;
+    if(placement !=0)   
+    {
+ placement-=1;
+    shifter++;
+    }    
+    
+
+  }
+  
 }
 
 }
+*/
+
+
+
+//tier 3
+for(;;)
+{
+  if(counter >= 6)
+  {
+    counter = -1;
+ 
+  }
+  else
+  {
+    RTI_Delay_ms(100);
+Segs_Custom(placement,caret[counter]);
+Segs_Custom(placement-1,0b10000000);
+Segs_Custom(placement+1,0b10000000);
+Segs_Custom(placement-2,0b10000000);
+Segs_Custom(placement+2,0b10000000);
+Segs_Normal(7,shifter,Segs_DP_OFF);
+Segs_Normal(5,righter,Segs_DP_OFF);
+Segs_Normal(6,lefter,Segs_DP_OFF);
+
+  }
+counter++;
+if(SWL_Pushed(SWL_RIGHT))
+{
+righter++;
+if(righter >=10)
+{
+  if(placement !=3)   
+    {
+ placement+=1;
+    shifter++;
+    righter = 0;
+    } 
+}
+}
+if(SWL_Pushed(SWL_LEFT))
+{
+  lefter++;
+  if(lefter >=10)
+  {
+    if(placement !=0)   
+    {
+ placement-=1;
+    shifter++;
+    lefter =0;
+    }
+  }
+}
+}
+}
+
+
 
 /********************************************************************/
 // Functions
