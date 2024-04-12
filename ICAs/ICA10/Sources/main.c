@@ -1,10 +1,10 @@
 /********************************************************************/
-// HC12 Program:  YourProg - MiniExplanation
+// HC12 Program:  ica10 - MiniExplanation
 // Processor:     MC9S12XDP512
 // Bus Speed:     MHz
 // Author:        Jeonghoon Lee
 // Details:       A more detailed explanation of the program is entered here               
-// Date:          Date Created
+// Date:          april 11th, 2024
 // Revision History :
 //  each revision will have a date + desc. of changes
 
