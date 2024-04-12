@@ -16,6 +16,8 @@
 #include <hidef.h>      /* common defines and macros */
 #include "derivative.h" /* derivative-specific definitions */
 #include "segs.h"
+#include "SW_LED.h"
+#include "rti.h"
 //Other system includes or your includes go here
 //#include <stdlib.h>
 //#include <stdio.h>
@@ -32,7 +34,7 @@
 /********************************************************************/
 // Global Variables
 /********************************************************************/
-
+ unsigned counter =  0;
 /********************************************************************/
 // Constants
 /********************************************************************/
@@ -59,16 +61,32 @@ Segs_Init();
 
   for (;;)
   {
+    
+Segs_8H(0,0b0100);
+Segs_Normal(4,'3',Segs_DP_OFF);
+Segs_Custom(1,0b01001010);
+Segs_Custom(2,0b11110000);
+Segs_8H(7,0b1110);
+Segs_Custom(5,0b10001011);
+Segs_Custom(6,0b10110001);
+if(SWL_Pushed(SWL_CTR))
+{
+  for(;;)
+  {
+    RTI_Delay_ms(100);
+Segs_16H(counter,0);
+counter++;
+  }
+}
    /* 
-Segs_Normal(1,'3',Segs_DP_OFF);
+
 Segs_Normal(3,13,Segs_DP_ON);
 Segs_Normal(6,0x0f,Segs_DP_OFF);
 */
 
-
-Segs_8H(4, 0b10101010);
-
+//Segs_16H(9999,0);
 }
+
 }
 
 /********************************************************************/
