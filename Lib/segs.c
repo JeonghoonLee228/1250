@@ -89,3 +89,21 @@ Segs_Normal(addr+2,(value/10)%10,Segs_DP_OFF);
 Segs_Normal(addr+1,(value/100)%10,Segs_DP_OFF);
 Segs_Normal(addr,(value/1000)%10,Segs_DP_OFF);
 }
+
+void Segs_ClearLine(Segs_LineOption row)
+{
+if(row == 0)
+{
+Segs_Custom(0,0b10000000);
+    Segs_Custom(1,0b10000000);
+    Segs_Custom(2,0b10000000);
+    Segs_Custom(3,0b10000000);
+}
+if(row == 1)
+{
+Segs_Custom(4,0b10000000);
+    Segs_Custom(5,0b10000000);
+    Segs_Custom(6,0b10000000);
+    Segs_Custom(7,0b10000000);
+}
+}
