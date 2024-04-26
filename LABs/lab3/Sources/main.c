@@ -33,7 +33,7 @@
 signed place = 0;
 int values[] = {0, 0, 0, 0};
 int i2 = 0;
-
+// int buttonPressed = -1;  
 unsigned thousand =0;
 unsigned hundred =0;
 unsigned ten =0;
@@ -139,3 +139,12 @@ sum = thousand+hundred+ten+one;
 /********************************************************************/
 // Interrupt Service Routines
 /********************************************************************/
+
+/*
+if (SWL_Pushed(SWL_UP) && buttonPressed != 0) {
+      buttonPressed = 0;
+      valueArr[edittingIndex]++;
+      if (valueArr[edittingIndex] == 10) valueArr[edittingIndex] = 0;
+    }
+    else if (!SWL_Pushed(SWL_UP) && buttonPressed == 0) buttonPressed = -1;
+    */
