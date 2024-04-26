@@ -90,7 +90,7 @@ Segs_16D(number,1);
     {
   
       button = 0;
-      if (x == 20-(*name++))
+      if (x == 7))
       {
       }
       else
